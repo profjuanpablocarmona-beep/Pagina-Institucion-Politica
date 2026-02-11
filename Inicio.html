@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UCR La Rioja</title>
+    <style>
+        /* =========================
+           ESTILO GENERAL
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 70px;
+        }
+
+        /* =========================
+           NAV + MENU (ARRIBA FIJO)
+        ========================= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #990000;
+            padding: 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            position: relative;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            padding: 18px 30px;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .menu a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+
+        .menu a:hover::after {
+            width: 70%;
+        }
+
+        /* =========================
+           DROPDOWN
+        ========================= */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 200px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 0 0 8px 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f5f5f5;
+            color: #cc0000;
+            padding-left: 25px;
+        }
+
+        .dropdown-menu li a::after {
+            display: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+        header {
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            padding: 35px 20px 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        header img {
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        header img:hover {
+            transform: scale(1.05);
+        }
+
+        header h1 {
+            position: relative;
+            z-index: 2;
+            font-size: 2.2em;
+            margin: 12px 0 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        header p {
+            position: relative;
+            z-index: 2;
+            font-size: 1.1em;
+            font-weight: 300;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            margin-top: 6px;
+        }
+
+        /* =========================
+           CONTENIDO PRINCIPAL
+        ========================= */
+        main {
+            flex: 1;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            padding: 50px 20px;
+        }
+
+        /* =========================
+           MENSAJE DE BIENVENIDA
+        ========================= */
+        .welcome {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .welcome .card {
+            background: white;
+            padding: 45px;
+            border-radius: 15px;
+            color: #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.6s ease;
+            border-left: 6px solid #990000;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome .card h2 {
+            color: #cc0000;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #cc0000;
+            position: relative;
+        }
+
+        .welcome .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: #990000;
+        }
+
+        .welcome .card p {
+            line-height: 1.8;
+            font-size: 1.15em;
+            color: #555;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            background: #770000;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.95);
+            font-size: 0.95em;
+            font-weight: 300;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 0;
+            }
+
+            nav {
+                position: relative;
+            }
+
+            header {
+                padding: 25px 20px;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            .menu {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .menu a {
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .dropdown-menu {
+                position: static;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                box-shadow: none;
+                background: rgba(255,255,255,0.95);
+                border-radius: 0;
+            }
+
+            .dropdown-menu li a {
+                padding-left: 35px;
+                font-size: 0.95em;
+            }
+
+            .welcome .card {
+                padding: 30px;
+            }
+
+            .welcome .card h2 {
+                font-size: 1.6em;
+            }
+
+            main {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="quienes-somos.html">Quiénes somos</a></li>
+            <li class="dropdown">
+                <a href="#">Recursos ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="proyectos.html">Proyectos</a></li>
+                    <li><a href="recursos.html">Recursos</a></li>
+                    <li><a href="campanas.html">Campañas</a></li>
+                </ul>
+            </li>
+            <li><a href="noticias.html">Noticias</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <img src="images/UCR-La-Rioja-Web.png" alt="Logo UCR La Rioja" width="150">
+        <h1>Unión Cívica Radical La Rioja</h1>
+        <p>Democracia Que Se Construye Todos Los Días</p>
+    </header>
+
+    <main>
+        <div class="welcome">
+            <div class="card">
+                <h2>Bienvenidos a la UCR La Rioja</h2>
+                <p>Esta es la página oficial de la Unión Cívica Radical en La Rioja. Aquí encontrarás información sobre nuestras actividades, proyectos, noticias y cómo contactarnos.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 UCR La Rioja - In Orbit With Jp</p>
+    </footer>
+
+</body>
+</html>

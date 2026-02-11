@@ -1,0 +1,292 @@
+/* =========================
+   ESTILO GENERAL
+========================= */
+
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding-top: 80px;
+  margin: 0;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 36px;
+}
+
+p {
+  color: #555;
+  font-size: 18px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* =========================
+   NAV + MENU
+========================= */
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.menu a:hover {
+  background-color: #f2f2f2;
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  min-width: 180px;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 2000;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-align: left;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-top {
+    background: #990000;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-top h3 {
+    color: white;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 2.5em;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+footer {
+    background: #cc0000;
+    color: white;
+    padding: 50px 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.footer-info h4 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-info p {
+    color: rgba(255,255,255,0.95);
+    font-size: 1em;
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+
+.footer-newsletter h4 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-newsletter p {
+    color: rgba(255,255,255,0.95);
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 500px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 0;
+    font-size: 1em;
+    outline: none;
+}
+
+.newsletter-form button {
+    padding: 15px 30px;
+    background: #990000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: #770000;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.footer-bottom p {
+    color: rgba(255,255,255,0.95);
+    font-size: 0.95em;
+    font-weight: 300;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    gap: 0;
+    background: white;
+    width: 100%;
+  }
+
+  .menu li {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    position: relative;
+    transform: translateY(0);
+    box-shadow: none;
+    border-radius: 0;
+    min-width: 100%;
+  }
+
+  .dropdown-menu li a {
+    padding-left: 25px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    width: 100%;
+  }
+
+  .social-icons {
+    gap: 20px;
+  }
+
+  .social-icons a {
+    font-size: 2em;
+  }
+}

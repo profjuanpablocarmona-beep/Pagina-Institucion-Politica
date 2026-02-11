@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - UCR La Rioja</title>
+    <style>
+        /* =========================
+           ESTILO GENERAL
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 110px;
+        }
+
+        /* =========================
+           NAV + MENU (ARRIBA FIJO)
+        ========================= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #990000;
+            padding: 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            position: relative;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            padding: 18px 30px;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .menu a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+
+        .menu a:hover::after {
+            width: 70%;
+        }
+
+        .menu a.active::after {
+            width: 70%;
+        }
+
+        /* =========================
+           DROPDOWN
+        ========================= */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 200px;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 0 0 8px 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f5f5f5;
+            color: #cc0000;
+            padding-left: 25px;
+        }
+
+        .dropdown-menu li a::after {
+            display: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+        header {
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            padding: 40px 20px 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        header img {
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        header img:hover {
+            transform: scale(1.05);
+        }
+
+        header h1 {
+            position: relative;
+            z-index: 2;
+            font-size: 2.2em;
+            margin: 12px 0 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        header p {
+            position: relative;
+            z-index: 2;
+            font-size: 1.1em;
+            font-weight: 300;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            margin-top: 6px;
+        }
+
+        /* =========================
+           CONTENIDO PRINCIPAL
+        ========================= */
+        main {
+            flex: 1;
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+            padding: 50px 20px;
+        }
+
+        .page-title {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #cc0000;
+            font-size: 2em;
+            margin-bottom: 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #cc0000;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: #990000;
+        }
+
+        article {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease;
+            animation-delay: 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+            border-left: 6px solid #990000;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 25px;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 45px rgba(0,0,0,0.35);
+        }
+
+        article h3 {
+            color: #cc0000;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        article p {
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        article p:last-child {
+            margin-bottom: 0;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+       /* =========================
+           FOOTER
+        ========================= */
+        .footer-top {
+            background: #990000;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-top h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 2.5em;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #cc0000;
+            color: white;
+            padding: 50px 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .footer-info h4 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-info p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1em;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .footer-newsletter h4 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-newsletter p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 0;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: #990000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #770000;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.95);
+            font-size: 0.95em;
+            font-weight: 300;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 0;
+            }
+
+            nav {
+                position: relative;
+            }
+
+            header {
+                padding: 25px 20px;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            .menu {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .menu a {
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .dropdown-menu {
+                position: static;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                box-shadow: none;
+                background: rgba(255,255,255,0.95);
+                border-radius: 0;
+            }
+
+            .dropdown-menu li a {
+                padding-left: 35px;
+                font-size: 0.95em;
+            }
+
+            .page-title, article {
+                padding: 25px;
+            }
+
+            article h3 {
+                font-size: 1.3em;
+            }
+
+            main {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="quienes-somos.html">Quiénes somos</a></li>
+            <li class="dropdown">
+                <a href="#">Recursos ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="proyectos.html">Proyectos</a></li>
+                    <li><a href="recursos.html">Recursos</a></li>
+                    <li><a href="campanas.html">Campañas</a></li>
+                </ul>
+            </li>
+            <li><a href="noticias.html" class="active">Noticias</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <img src="images/UCR-La-Rioja-Web.png" alt="Logo UCR La Rioja" width="150">
+        <h1>Unión Cívica Radical La Rioja</h1>
+        <p>Democracia Que Se Construye Todos Los Días</p>
+    </header>
+
+    <main>
+        <div class="page-title">
+            <h2>Noticias</h2>
+        </div>
+        
+        <article>
+            <span class="news-date">10 de febrero de 2026</span>
+            <h3>Representantes del partido solicitarán rendición de cuentas a los diferentes intendentes de los departamentos</h3>
+            <p>Los representantes de la Unión Cívica Radical (UCR) en cada distrito de La Rioja presentarán una nota formal a los intendentes de los diferentes departamentos, en la que exigirán la rendición de cuentas de los fondos destinados a los festivales que se realizaron recientemente en sus jurisdicciones.</p>
+            <p>Desde el partido se destaca la importancia de la transparencia en el manejo de los recursos públicos y la necesidad de que la sociedad conozca detalladamente el destino de los fondos asignados a estos eventos culturales y recreativos.</p>
+            <p>La UCR La Rioja reafirma su compromiso con la fiscalización ciudadana y la transparencia, solicitando a los gobiernos locales que informen de manera clara y oportuna sobre los gastos realizados, para garantizar que los recursos sean utilizados en beneficio de la comunidad.</p>
+        </article>
+
+        <article>
+            <span class="news-date">1 de febrero de 2026</span>
+            <h3>La Rioja: el Comité Provincia de la UCR exige soluciones concretas para la región de los Llanos</h3>
+            <p>El Comité Provincia de la Unión Cívica Radical (UCR) de La Rioja manifestó su profunda preocupación por la crítica situación hídrica que atraviesa año tras año la región de los Llanos. En un comunicado oficial, los dirigentes radicales exigieron al gobierno provincial que implemente medidas concretas que garanticen el acceso al agua potable y a soluciones sostenibles para los riojanos que habitan esta zona.</p>
+            <p>"Cada año vemos cómo la falta de planificación y de políticas efectivas agrava la situación de miles de familias, poniendo en riesgo la producción y la vida cotidiana. Es urgente que se actúe con responsabilidad y se brinden respuestas reales", señaló el Comité Provincia.</p>
+            <p>Desde la UCR se subrayó que la crisis del agua no es un problema aislado, sino el resultado de años de desatención, y advirtieron que la política debe estar al servicio de los ciudadanos, especialmente de quienes más sufren la falta de recursos básicos.</p>
+        </article>
+
+        <article>
+            <span class="news-date">15 de enero de 2026</span>
+            <h3>La Rioja: la UCR exige actualización de salarios para sacar a los riojanos de la pobreza</h3>
+            <p>El Comité Provincia de la Unión Cívica Radical (UCR) de La Rioja alertó sobre los salarios más bajos del país que perciben los trabajadores riojanos y solicitó al gobernador Ricardo Quintela una urgente actualización de los mismos. Según los dirigentes radicales, los sueldos actuales colocan a gran parte de la población por debajo de los índices de pobreza, afectando seriamente la calidad de vida de las familias.</p>
+            <p>"El salario no puede seguir siendo un obstáculo para el desarrollo y la dignidad de los riojanos. Pedimos al gobernador que tome medidas inmediatas para que los trabajadores y trabajadoras puedan vivir con tranquilidad y cubrir sus necesidades básicas", expresaron desde la UCR.</p>
+            <p>En el comunicado, el Comité Provincia remarcó que esta situación afecta no solo a los empleados públicos, sino también al sector privado, y que es indispensable una política salarial que esté a la altura de los desafíos económicos y sociales de La Rioja.</p>
+        </article>
+    </main>
+
+    <footer>
+       <div class="footer-top">
+        <h3>Seguinos en nuestras redes</h3>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61577092967208" target="_blank" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/unioncivicaradicallarioja/" target="_blank" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+            </a>
+            <a href="https://x.com/UCR_LaRioja" target="_blank" aria-label="Twitter/X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h4>Unión Cívica Radical</h4>
+                <p>Bazan Y Bustos 825</p>
+                <p>La Rioja - Capital</p>
+                <p>Argentina</p>
+                <p style="margin-top: 20px;"><strong>Teléfono:</strong> 3804112233</p>
+                <p><strong>Email:</strong> ucrlarioja@gmail.com</p>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Si querés recibir el newsletter semanal de la UCR dejanos tu dirección de e-mail</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+                    <input type="email" placeholder="EMAIL" required>
+                    <button type="submit">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 UCR La Rioja - In Orbit With Jp</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            
+            alert('¡Gracias ' + nombre + '! Tu mensaje ha sido enviado correctamente. Te contactaremos pronto.');
+            
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>
+    </footer>
+
+</body>
+</html>
