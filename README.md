@@ -16,8 +16,8 @@ Portfolio web personal con diseño moderno y responsive. Muestra mis proyectos, 
 - [OrbiTask](https://profjuanpablocarmona-beep.github.io/orbitask) - Gestor de tareas inteligente
 
 ## 📫 Contacto
-- Email: tu-email@ejemplo.com
-- LinkedIn: [Tu perfil](https://linkedin.com/in/tu-perfil)
+- Email: profjuanpablocarmona@gmail.com
+- LinkedIn: www.linkedin.com/in/juan-pablo-carmona-quinteros-1858a7229
 
 ---
 
