@@ -1,2 +1,48 @@
-# profjuanpablocarmona-beep.github.io
-Portfolio web personal - Desarrollador Full Stack
+# 👨‍💻 Portfolio Personal - Juan Pablo Carmona
+
+## 🌐 Sitio Web
+[Ver Portfolio](https://profjuanpablocarmona-beep.github.io)
+
+## 📝 Descripción
+Portfolio web personal con diseño moderno y responsive. Muestra mis proyectos, habilidades y experiencia como desarrollador.
+
+## 🛠️ Tecnologías Utilizadas
+- HTML5
+- CSS3
+- JavaScript
+- Responsive Design
+
+## 📂 Proyectos Destacados
+- [OrbiTask](https://profjuanpablocarmona-beep.github.io/orbitask) - Gestor de tareas inteligente
+
+## 📫 Contacto
+- Email: tu-email@ejemplo.com
+- LinkedIn: [Tu perfil](https://linkedin.com/in/tu-perfil)
+
+---
+
+⭐ Si te gusta mi trabajo, sígueme en GitHub
+```
+
+---
+
+## ✅ **Checklist antes de publicar:**
+
+- [ ] El archivo principal se llama `index.html`
+- [ ] Todas las rutas de imágenes/CSS están correctas
+- [ ] Si usas rutas relativas como `./images/foto.jpg` están bien
+- [ ] No hay links rotos
+- [ ] Se ve bien en móvil (responsive)
+
+---
+
+## 🔗 **Tus URLs finales quedarán:**
+```
+Portfolio principal:
+https://profjuanpablocarmona-beep.github.io
+
+OrbiTask:
+https://profjuanpablocarmona-beep.github.io/orbitask
+
+Futuros proyectos:
+https://profjuanpablocarmona-beep.github.io/nombre-proyecto
