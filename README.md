@@ -13,7 +13,7 @@ Portfolio web personal con diseño moderno y responsive. Muestra mis proyectos, 
 - Responsive Design
 
 ## 📂 Proyectos Destacados
-- [OrbiTask](https://profjuanpablocarmona-beep.github.io/orbitask) - Gestor de tareas inteligente
+- [OrbiTask](https://profjuanpablocarmona-beep.github.io/OrbiTask/) - Gestor de tareas inteligente
 
 ## 📫 Contacto
 - Email: profjuanpablocarmona@gmail.com
@@ -39,8 +39,8 @@ Portfolio web personal con diseño moderno y responsive. Muestra mis proyectos, 
 ## 🔗 **Tus URLs finales quedarán:**
 ```
 Portfolio principal:
-https://profjuanpablocarmona-beep.github.io
+https://github.com/profjuanpablocarmona-beep
 
 OrbiTask:
-https://profjuanpablocarmona-beep.github.io/orbi-tasks
+https://profjuanpablocarmona-beep.github.io/OrbiTask/
 
