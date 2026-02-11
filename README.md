@@ -42,7 +42,5 @@ Portfolio principal:
 https://profjuanpablocarmona-beep.github.io
 
 OrbiTask:
-https://profjuanpablocarmona-beep.github.io/orbitask
+https://profjuanpablocarmona-beep.github.io/orbi-tasks
 
-Futuros proyectos:
-https://profjuanpablocarmona-beep.github.io/nombre-proyecto
