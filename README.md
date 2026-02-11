@@ -24,20 +24,6 @@ Portfolio web personal con diseño moderno y responsive. Muestra mis proyectos, 
 ⭐ Si te gusta mi trabajo, sígueme en GitHub
 ```
 
----
-
-## ✅ **Checklist antes de publicar:**
-
-- [ ] El archivo principal se llama `index.html`
-- [ ] Todas las rutas de imágenes/CSS están correctas
-- [ ] Si usas rutas relativas como `./images/foto.jpg` están bien
-- [ ] No hay links rotos
-- [ ] Se ve bien en móvil (responsive)
-
----
-
-## 🔗 **Tus URLs finales quedarán:**
-```
 Portfolio principal:
 https://github.com/profjuanpablocarmona-beep
 
